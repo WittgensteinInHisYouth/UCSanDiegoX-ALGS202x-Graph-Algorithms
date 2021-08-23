@@ -2,10 +2,18 @@
 
 import sys
 import queue
+import networkx as nx
+from networkx.algorithms import bipartite as bi
+
 
 def bipartite(adj):
     #write your code here
-    return -1
+    G = nx.Graph()
+    for vertice in range(len(adj)):
+        for next_vertice in adj[vertice]:
+            G.add_edge(vertice, next_vertice)
+
+    return int(bi.is_bipartite(G))
 
 if __name__ == '__main__':
     input = sys.stdin.read()

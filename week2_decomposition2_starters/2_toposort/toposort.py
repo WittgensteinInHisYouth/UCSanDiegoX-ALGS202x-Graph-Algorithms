@@ -1,6 +1,7 @@
 #Uses python3
 
 import sys
+import networkx as nx
 
 def dfs(adj, used, order, x):
     #write your code here
@@ -11,7 +12,14 @@ def toposort(adj):
     used = [0] * len(adj)
     order = []
     #write your code here
-    return order
+
+    G = nx.DiGraph()
+    for vertice in range(len(adj)):
+        for next_vertice in adj[vertice]:
+            G.add_edge(vertice, next_vertice)
+
+
+    return list(nx.topological_sort(G))
 
 if __name__ == '__main__':
     input = sys.stdin.read()

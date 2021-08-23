@@ -1,11 +1,24 @@
 #Uses python3
 import sys
 import math
+import networkx as nx
+import  numpy as np
 
 def minimum_distance(x, y):
     result = 0.
     #write your code here
-    return result
+
+
+    num_vertices = len(x)
+    G = nx.Graph()
+    for vertice in range(num_vertices):
+        for next_vertice in range(vertice+1, num_vertices):
+            G.add_edge(vertice, next_vertice,
+                       weight=np.sqrt((x[vertice] - x[next_vertice])**2 + (y[vertice]-y[next_vertice])**2))
+
+    T = nx.minimum_spanning_tree(G)
+
+    return T.size(weight="weight")
 
 
 if __name__ == '__main__':
